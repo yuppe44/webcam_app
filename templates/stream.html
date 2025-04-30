@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カメラ</title>
+</head>
+<body>
+    <h1>カメラ映像</h1>
+    <img src="{{ stream_url }}" width="640" height="480">
+    <a href="{{ url_for('logout') }}">ログアウト</a>
+</body>
+</html>
