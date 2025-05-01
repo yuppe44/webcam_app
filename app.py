@@ -3,6 +3,9 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from dotenv import load_dotenv
 import os
 
+import requests
+from flask import Response, stream_with_context
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -11,6 +14,18 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY")
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
+
+@app.route('/video_proxy')
+@login_required
+def video_proxy():
+    upstream = requests.get("http://localhost:8081/?action=stream", stream=True)
+
+    def generate():
+        for chunk in upstream.iter_content(chunk_size=1024):
+            if chunk:
+                yield chunk
+
+    return Response(stream_with_context(generate()), content_type=upstream.headers['Content-Type'])
 
 # ユーザークラス
 class User(UserMixin):
@@ -38,7 +53,7 @@ def login():
 @login_required
 def stream():
     # mjpg-streamer で配信されるストリームURLを埋め込む
-    return render_template('stream.html', stream_url="http://localhost:8081/?action=stream")
+    return render_template('stream.html', stream_url=url_for('video_proxy'))
 
 @app.route('/logout')
 @login_required

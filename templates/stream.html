@@ -10,4 +10,9 @@
     <img src="{{ stream_url }}" width="640" height="480">
     <a href="{{ url_for('logout') }}">ログアウト</a>
 </body>
+<script>
+    const streamUrl = "/video_proxy";
+    const streamImg = document.getElementById("stream");
+    streamImg.src = streamUrl;
+  </script>
 </html>
