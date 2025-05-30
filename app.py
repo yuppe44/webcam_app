@@ -62,4 +62,4 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(host='localhost', debug=True, port=8443, ssl_context=('cert.pem', 'key.pem'))
+    app.run(host='192.168.11.11', debug=True, port=8443, ssl_context=('cert.pem', 'key.pem'))
