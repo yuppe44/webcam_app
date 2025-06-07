@@ -6,9 +6,16 @@
     <title>カメラ</title>
 </head>
 <body>
-    <h1>カメラ映像</h1>
-    <img src="{{ stream_url }}" width="640" height="480">
-    <a href="{{ url_for('logout') }}">ログアウト</a>
+    <header>
+        <h1>カメラ映像</h1> 
+    </header>
+    <main>
+        <img src="{{ stream_url }}" width="640" height="480">
+        
+    </main>
+    <footer>
+        <a href="{{ url_for('logout') }}">ログアウト</a>
+    </footer>
 </body>
 <script>
     const streamUrl = "/video_proxy";
