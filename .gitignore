@@ -3,3 +3,4 @@
 venv/
 *.out
 *.avi
+._app.py
